@@ -44,7 +44,9 @@ class Worker(models.Model):
 
 class Punto(models.Model):
     nombre = models.CharField(
-        max_length = 100, null = False, blank = False
+        max_length = 100,
+        null = False,
+        blank = False
         )
     url = models.URLField(
         blank = True,
