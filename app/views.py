@@ -6,14 +6,22 @@ from django.contrib.auth.decorators import login_required
 from app.models import Worker, Punto, Registro
 
 
+
+# generar qr
+
+
+
+
+
 # ####################
 # LOGICA PARA EL REGISTRO DE LOS SERENOS
 # PASO X PUNTOS DE CONTROL
 #
 
-# requiere estar loggeado, sino redirecciona al login
+# requiere estar loggeado
+# sino lleva a la pag del login
 @login_required 
-def send_request(request, id):
+def send(request, id):
     # solicita el id del punto de control
     # EL ID va como parámetro en el qr
     
@@ -35,3 +43,5 @@ def send_request(request, id):
     return HttpResponse(f"Solicitud de {worker} en {punto} \n {new_registro}")
 #
 # ####################
+
+

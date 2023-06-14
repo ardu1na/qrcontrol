@@ -1,8 +1,19 @@
 from django.db import models
+from django.urls import reverse
 
 from django.contrib.auth.models import User
 
 
+def generate_qr_code_url(url, size=300):
+    
+    base_url = 'https://chart.googleapis.com/chart'
+    params = {
+        'cht': 'qr',
+        'chs': f'{size}x{size}',
+        'chl': url
+    }
+    qr_code_url = f'{base_url}?{"&".join(f"{key}={value}" for key, value in params.items())}'
+    return qr_code_url
 
 
 
@@ -52,7 +63,24 @@ class Punto(models.Model):
         blank = True,
         null = True
         )
+    qr = models.URLField(
+        blank = True,
+        null = True
+        )
     
+    
+    
+        
+    def save(self, *args, **kwargs):
+        if not self.url:
+            self.url = reverse('send', kwargs={'id': self.pk})
+        if not self.qr:
+            self.qr = generate_qr_code_url(self.url)
+        
+        super().save(*args, **kwargs)
+
+        
+        
     def __str__ (self):
         return self.nombre
     
