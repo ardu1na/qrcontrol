@@ -57,25 +57,26 @@ class Punto(models.Model):
     nombre = models.CharField(
         max_length = 100,
         null = False,
-        blank = False
+        blank = False,
+        verbose_name = "Punto de Control"
         )
     url = models.URLField(
         blank = True,
-        null = True
+        null = True,
+
         )
     qr = models.URLField(
         blank = True,
-        null = True
+        null = True,
+        verbose_name="QR"
         )
     
     
     
         
     def save(self, *args, **kwargs):
-        if not self.url:
-            self.url = reverse('send', kwargs={'id': self.pk})
-        if not self.qr:
-            self.qr = generate_qr_code_url(self.url)
+        self.url = f"https://localhost:8000/send/{self.id}"
+        self.qr = generate_qr_code_url(self.url)
         
         super().save(*args, **kwargs)
 
