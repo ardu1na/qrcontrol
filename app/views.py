@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 
@@ -7,9 +6,9 @@ from app.models import Worker, Punto, Registro
 
 
 
-# generar qr
-
-
+@login_required 
+def index(request):
+    return render(request, 'index.html', {})
 
 
 
@@ -39,7 +38,6 @@ def send(request, id):
     new_registro = Registro.objects.create(worker=worker, punto=punto)
     print(new_registro)
     
-    message = f"Solicitud de {worker} en {punto} \n {new_registro}"
     context = {
         'punto': punto
     }
