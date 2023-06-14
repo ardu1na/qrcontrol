@@ -24,16 +24,28 @@ class Worker(models.Model):
     )
 
     shift = models.CharField(
-        max_length=20, choices=SHIFT_CHOICES, verbose_name="Turno")
+        max_length=20,
+        choices=SHIFT_CHOICES,
+        verbose_name="TURNO (deja en blanco si no corresponde)",
+        null=True, blank=True
+        )
     
     email = models.EmailField(
-        verbose_name="Correo electrónico")
+        verbose_name="EMAIL  (email: ejemplo@gmail.com ---> el usuario será: ejemplo ")
     
     user = models.OneToOneField(
-        User, null=True, blank=True, on_delete=models.CASCADE, related_name="worker", verbose_name="Empleado")
+        User,
+        null=True, blank=True,
+        on_delete=models.CASCADE,
+        related_name="worker",
+        verbose_name="Empleado",
+        editable=False)
 
     def __str__(self):
         return self.email.split("@")[0]
+    
+    class Meta:
+        verbose_name = "Empleado"
   
            
     def save(self, *args, **kwargs):

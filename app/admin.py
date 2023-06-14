@@ -38,7 +38,20 @@ class PuntoAdmin(admin.ModelAdmin):
 admin.site.register(Punto, PuntoAdmin)
 
 admin.site.register(Registro)
-admin.site.register(Worker)
+
+
+
+
+class WorkerAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    fieldsets = (
+        (None, {'fields': ('shift', 'email')},
+         ),
+        ('CONTRASEÑA', {'fields': () , 'description': 'Atención! "planB" es la contraseña. PERO pidele a tu empleado que la cambie para mayor seguridad. '}
+         ),
+    )
+
+admin.site.register(Worker, WorkerAdmin)
 
 
 
