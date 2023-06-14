@@ -17,7 +17,7 @@ class ImageURLWidget(forms.TextInput):
         
 
 class PuntoAdminForm(forms.ModelForm):
-    qr = forms.URLField(widget=ImageURLWidget, required=False, help_text="QR DE CADA PUNTO DE CONTROL")
+    qr = forms.URLField(widget=ImageURLWidget, required=False, help_text="QR LINK PARA IMPRIMIR - DEJA EN BLANCO - SE COMPLETARÁ AUTOMATICAMENTE", label="QR")
 
     class Meta:
         model = Punto
@@ -41,7 +41,10 @@ admin.site.register(Punto, PuntoAdmin)
 
 
 class RegistroAdmin(admin.ModelAdmin):
-    list_display = ('punto', 'worker', 'datetime')
+    list_display = ('datetime', 'punto', 'worker' )
+    list_filter = ('worker', 'punto')
+    list_per_page =  10
+    date_hierarchy = 'datetime'
 admin.site.register(Registro, RegistroAdmin)
 
 
@@ -52,7 +55,7 @@ class WorkerAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('shift', 'apellido', 'nombre', 'email')},
          ),
-        ('CONTRASEÑA', {'fields': () , 'description': 'Atención! "planB" es la contraseña. PERO pidele a tu empleado que la cambie para mayor seguridad. '}
+        ('CONTRASEÑA', {'fields': () , 'description': 'Atención! "planB" es la contraseña. PERO pidele a tu empleado que la cambie para mayor seguridad. El USERNAME será la primera parte del email.'}
          ),
     )
 

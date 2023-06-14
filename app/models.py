@@ -94,7 +94,7 @@ class Punto(models.Model):
     qr = models.URLField(
         blank = True,
         null = True,
-        verbose_name="LINK PARA IMPRIMIR QR - DEJA EN BLANCO -> SE COMPLETARÁ SOLO AL GUARDAR EL PUNTO DE CONTROL"
+        verbose_name="QR"
         )
     
     
@@ -116,15 +116,18 @@ class Registro(models.Model):
     worker = models.ForeignKey(
         Worker,
         related_name="registro",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        verbose_name="EMPLEADO"
         )
     datetime = models.DateTimeField(
-        auto_now_add=True
+        auto_now_add=True,
+        verbose_name="REGISTRO"
         )
     punto = models.ForeignKey(
         Punto,
         on_delete=models.CASCADE,
-        related_name="registro"
+        related_name="registro",
+        verbose_name= "PUNTO DE CONTROL"
         )
     
     def __str__ (self):
