@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 def generate_qr_code_url(url, size=300):
-    
+
     base_url = 'https://chart.googleapis.com/chart'
     params = {
         'cht': 'qr',
@@ -29,20 +29,20 @@ class Worker(models.Model):
         verbose_name="TURNO (deja en blanco si no corresponde)",
         null=True, blank=True
         )
-    
+
     email = models.EmailField(
         verbose_name="EMAIL  ( si el email es ejemplo2@gmail.com --> el usuario será: ejemplo2 )")
-    
+
     nombre = models.CharField(
         max_length=90,
         null=True, blank=True
         )
-    
+
     apellido = models.CharField(
         max_length=90,
         null=True, blank=True
         )
-    
+
     user = models.OneToOneField(
         User,
         null=True, blank=True,
@@ -56,13 +56,13 @@ class Worker(models.Model):
             return f'{self.nombre} {self.apellido}'
         else:
             return self.email.split("@")[0]
-    
+
     class Meta:
         verbose_name = "Empleado"
-  
-           
+
+
     def save(self, *args, **kwargs):
-        if not self.user: 
+        if not self.user:
             self.user = User.objects.create_user(
                 username = self.email.split("@")[0],
                 email = self.email,
@@ -95,23 +95,23 @@ class Punto(models.Model):
         null = True,
         verbose_name="LINK PARA IMPRIMIR QR - DEJA EN BLANCO -> SE COMPLETARÁ SOLO AL GUARDAR EL PUNTO DE CONTROL"
         )
-    
-    
-    
-        
+
+
+
+
     def save(self, *args, **kwargs):
-        self.url = f"https://localhost:8000/send/{self.id}"
+        self.url = f"https://granjapicodorado.pythonanywhere.com/send/{self.id}"
         self.qr = generate_qr_code_url(self.url)
-        
+
         super().save(*args, **kwargs)
 
-        
-        
+
+
     def __str__ (self):
         return self.nombre
-    
-    
-class Registro(models.Model):    
+
+
+class Registro(models.Model):
     worker = models.ForeignKey(
         Worker,
         related_name="registro",
@@ -125,7 +125,6 @@ class Registro(models.Model):
         on_delete=models.CASCADE,
         related_name="registro"
         )
-    
+
     def __str__ (self):
         return f"{self.datetime.strftime('%d/%m/%Y %H:%M')}: {self.worker} point {self.punto}"
-    
