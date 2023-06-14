@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django import forms
+from import_export.admin import ImportExportModelAdmin
 
 from app.models import Worker, Punto, Registro
-
-
+from app.resources import RegistroResource
 
 
 class ImageURLWidget(forms.TextInput):
@@ -40,15 +40,17 @@ admin.site.register(Punto, PuntoAdmin)
 
 
 
-class RegistroAdmin(admin.ModelAdmin):
+class RegistroAdmin(ImportExportModelAdmin):
     list_display = ('datetime', 'punto', 'worker' )
     list_filter = ('worker', 'punto')
     list_per_page =  10
     date_hierarchy = 'datetime'
+    resource_class = RegistroResource
+
 admin.site.register(Registro, RegistroAdmin)
 
 
-
+# Lib\site-packages\jazzmin\templates\admin\base.html borrrar el footer
 
 class WorkerAdmin(admin.ModelAdmin):
     list_display = ('user', 'email', 'nombre', 'apellido')

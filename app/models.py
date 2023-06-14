@@ -33,13 +33,21 @@ class Worker(models.Model):
     email = models.EmailField(
         verbose_name="EMAIL")
     
+    telefono = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        verbose_name="N° TELÉFONO"
+    )
     nombre = models.CharField(
         max_length=90,
-        null=True, blank=True
+        null=True, blank=True,
+        verbose_name="NOMBRE"
         )
     
     apellido = models.CharField(
         max_length=90,
+        verbose_name="APELLIDO",
         null=True, blank=True
         )
     
@@ -121,7 +129,7 @@ class Registro(models.Model):
         )
     datetime = models.DateTimeField(
         auto_now_add=True,
-        verbose_name="REGISTRO"
+        verbose_name="FECHA Y HORA"
         )
     punto = models.ForeignKey(
         Punto,
