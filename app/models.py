@@ -31,7 +31,7 @@ class Worker(models.Model):
         )
     
     email = models.EmailField(
-        verbose_name="EMAIL  ( si el email es ejemplo2@gmail.com --> el usuario será: ejemplo2 )")
+        verbose_name="EMAIL")
     
     nombre = models.CharField(
         max_length=90,
@@ -48,7 +48,7 @@ class Worker(models.Model):
         null=True, blank=True,
         on_delete=models.CASCADE,
         related_name="worker",
-        verbose_name="Empleado",
+        verbose_name="USERNAME",
         editable=False)
 
     def __str__(self):
@@ -83,7 +83,8 @@ class Punto(models.Model):
         max_length = 100,
         null = False,
         blank = False,
-        verbose_name = "Punto de Control"
+        verbose_name = "Punto de Control",
+        unique=True,
         )
     url = models.URLField(
         blank = True,

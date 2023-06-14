@@ -48,7 +48,7 @@ admin.site.register(Registro, RegistroAdmin)
 
 
 class WorkerAdmin(admin.ModelAdmin):
-    list_display = ('user', 'nombre', 'apellido', 'email')
+    list_display = ('user', 'email', 'nombre', 'apellido')
     fieldsets = (
         (None, {'fields': ('shift', 'apellido', 'nombre', 'email')},
          ),
