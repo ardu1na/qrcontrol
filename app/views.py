@@ -39,8 +39,13 @@ def send(request, id):
     new_registro = Registro.objects.create(worker=worker, punto=punto)
     print(new_registro)
     
+    message = f"Solicitud de {worker} en {punto} \n {new_registro}"
+    context = {
+        'punto': punto
+    }
+    html_template = 'success.html'
     # respuesta al usuario
-    return HttpResponse(f"Solicitud de {worker} en {punto} \n {new_registro}")
+    return render(request, html_template, context)
 #
 # ####################
 

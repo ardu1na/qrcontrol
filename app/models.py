@@ -99,8 +99,8 @@ class Punto(models.Model):
     
     
         
-    def save(self, *args, **kwargs):
-        self.url = f"https://localhost:8000/send/{self.id}"
+    def save(self, *args, **kwargs): # aqui hay que hacer que guarde y despues añada el id
+        self.url = f'https://localhost:8000/send/{self.id}/'
         self.qr = generate_qr_code_url(self.url)
         
         super().save(*args, **kwargs)

@@ -1,0 +1,17 @@
+{% extends 'layout/base.html' %}
+{% block 'title' %}
+Registro Añadido
+{% endblock %}
+  
+{% block 'content' %}
+
+<div class="container my-5 p-2">
+    <div class="alert alert-success p-5" role="alert">
+        <h4 class="alert-heading">Muy Bien  <i class="fa-solid fa-thumbs-up fs-1 ps-3"></i> </h4>
+        <p class="my-3">{{request.user|capfirst}} tu registro QR desde {{punto}} fue enviado sin problemas!</p>
+        <hr>
+        <p class="mb-0"> <strong> Gracias! </strong> <i class="fa-regular fa-face-smile-beam fs-1 p-2"></i>  Que tengas buena jornada</p>
+    </div>
+</div>
+
+{% endblock %}
