@@ -34,18 +34,23 @@ class PuntoAdmin(admin.ModelAdmin):
         else:
             return ''
 
-    display_qr_image.short_description = 'QR Code'
+    display_qr_image.short_description = 'QR Code '
 admin.site.register(Punto, PuntoAdmin)
 
-admin.site.register(Registro)
+
+
+
+class RegistroAdmin(admin.ModelAdmin):
+    list_display = ('punto', 'worker', 'datetime')
+admin.site.register(Registro, RegistroAdmin)
 
 
 
 
 class WorkerAdmin(admin.ModelAdmin):
-    list_display = ('user',)
+    list_display = ('user', 'nombre', 'apellido', 'email')
     fieldsets = (
-        (None, {'fields': ('shift', 'email')},
+        (None, {'fields': ('shift', 'apellido', 'nombre', 'email')},
          ),
         ('CONTRASEÑA', {'fields': () , 'description': 'Atención! "planB" es la contraseña. PERO pidele a tu empleado que la cambie para mayor seguridad. '}
          ),

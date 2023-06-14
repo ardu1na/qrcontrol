@@ -31,7 +31,17 @@ class Worker(models.Model):
         )
     
     email = models.EmailField(
-        verbose_name="EMAIL  (email: ejemplo@gmail.com ---> el usuario será: ejemplo ")
+        verbose_name="EMAIL  ( si el email es ejemplo2@gmail.com --> el usuario será: ejemplo2 )")
+    
+    nombre = models.CharField(
+        max_length=90,
+        null=True, blank=True
+        )
+    
+    apellido = models.CharField(
+        max_length=90,
+        null=True, blank=True
+        )
     
     user = models.OneToOneField(
         User,
@@ -42,7 +52,10 @@ class Worker(models.Model):
         editable=False)
 
     def __str__(self):
-        return self.email.split("@")[0]
+        if self.nombre and self.apellido:
+            return f'{self.nombre} {self.apellido}'
+        else:
+            return self.email.split("@")[0]
     
     class Meta:
         verbose_name = "Empleado"
@@ -80,7 +93,7 @@ class Punto(models.Model):
     qr = models.URLField(
         blank = True,
         null = True,
-        verbose_name="QR"
+        verbose_name="LINK PARA IMPRIMIR QR - DEJA EN BLANCO -> SE COMPLETARÁ SOLO AL GUARDAR EL PUNTO DE CONTROL"
         )
     
     
