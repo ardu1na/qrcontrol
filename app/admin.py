@@ -27,6 +27,7 @@ class PuntoAdminForm(forms.ModelForm):
 class PuntoAdmin(admin.ModelAdmin):
     form = PuntoAdminForm
     list_display = ('nombre', 'display_qr_image')
+    readonly_fields = ('qr',)
     
     def display_qr_image(self, obj):
         if obj.qr:
@@ -35,6 +36,16 @@ class PuntoAdmin(admin.ModelAdmin):
             return ''
 
     display_qr_image.short_description = 'QR Code '
+    
+    
+    fieldsets = (
+        (None, {'fields': ('nombre', 'qr')},
+         ),
+        ('IMPRIMIR QR', {'fields': () , 'description': 'Para imprimir los código QR puedes ir a https://granjapicodorado.pythoanywhere.com/control'}
+         ),
+    )
+    
+    
 admin.site.register(Punto, PuntoAdmin)
 
 

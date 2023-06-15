@@ -1,0 +1,45 @@
+{% extends 'layout/base.html' %}
+{% block 'title' %}
+Punto de Control {{punto.nombre}}
+{% endblock %}
+  
+{% block 'content' %}
+
+<div class="col-12 m-3">
+    <div class=" my-5 p-2 text-center">
+
+        <h4> Puntos de Control de la empresa </h4>
+        <p class="my-3">
+            Puedes hacer clic derecho en cada imagen y descargar los códigos uno por uno.</p>
+        <p> O puedes imprimir la página web completa:   <a class="btn btn-danger ms-5  px-4 text-light fs-3" id="print"> IMPRIMIR QRs</a></p>
+      
+        <hr>
+    </div>
+
+    <div class="p-2 text-center">
+        {% for punto in puntos %}
+        <p> {{punto.nombre}} </p>
+
+        <img class="img-fluid" src="{{punto.qr}}" width="300" height="300" />
+        <hr>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+
+
+<script>
+    var printQR = document.getElementById("print");
+  
+    printQR.addEventListener("click", function() {
+      var confirmPrint = confirm("¿Deseas imprimir los códigos QR?");
+  
+      if (confirmPrint) {
+        window.print();
+      }
+    });
+  </script>
+  
+{% endblock %}

@@ -12,6 +12,16 @@ def index(request):
 
 
 
+@login_required 
+def qrs(request):
+    puntos = Punto.objects.all()
+    context={
+        'puntos':puntos,
+    }
+    return render(request, 'qr.html', context)
+
+
+
 # ####################
 # LOGICA PARA EL REGISTRO DE LOS SERENOS
 # PASO X PUNTOS DE CONTROL
