@@ -26,7 +26,22 @@ class Worker(models.Model):
     shift = models.CharField(
         max_length=20,
         choices=SHIFT_CHOICES,
-        verbose_name="TURNO (deja en blanco si no corresponde)",
+        verbose_name="TURNO",
+        null=True, blank=True,
+        help_text= "(deja en blanco si no corresponde)",
+
+        )
+    
+    KIND_CHOICES = (
+        ('EMPLEADO', 'Empleado'),
+        ('SERENO', 'Sereno'),
+    )
+    
+    kind = models.CharField(
+        max_length=20,
+        choices=KIND_CHOICES,
+        verbose_name="CATEGORÍA",
+        help_text= "(deja en blanco si no corresponde)",
         null=True, blank=True
         )
     

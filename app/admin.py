@@ -64,9 +64,11 @@ admin.site.register(Registro, RegistroAdmin)
 # Lib\site-packages\jazzmin\templates\admin\base.html borrrar el footer
 
 class WorkerAdmin(admin.ModelAdmin):
-    list_display = ('user', 'email', 'nombre', 'apellido')
+    list_display = ('user', 'email', 'nombre', 'apellido', 'kind', 'shift')
+    list_filter = ('kind', 'shift')
+
     fieldsets = (
-        (None, {'fields': ('shift', 'apellido', 'nombre', 'email')},
+        (None, {'fields': ('shift', 'kind', 'apellido', 'nombre', 'email')},
          ),
         ('CONTRASEÑA', {'fields': () , 'description': 'Atención! "planB" es la contraseña. PERO pidele a tu empleado que la cambie para mayor seguridad. El USERNAME será la primera parte del email.'}
          ),
