@@ -57,12 +57,15 @@ def send(request, id):
     new_registro = Registro.objects.create(worker=worker, punto=punto)
     print(new_registro)
     
-    context = {
-        'punto': punto
-    }
+    return redirect('success')
+
+
+
+@login_required 
+def success(request):
     html_template = 'success.html'
     # respuesta al usuario
-    return render(request, html_template, context)
+    return render(request, html_template, {})
 #
 # ####################
 
