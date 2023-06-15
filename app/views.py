@@ -2,14 +2,23 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 
+
 from app.models import Worker, Punto, Registro
 
 
+def error404(request, exception):
+        data = {}
+        return render(request,'404.html', data)
+
+
+
+def error500(request):
+    data = {}
+    return render(request,'500.html', data)
 
 @login_required 
 def index(request):
     return render(request, 'index.html', {})
-
 
 
 @login_required 
