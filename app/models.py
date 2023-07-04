@@ -85,9 +85,10 @@ class Worker(models.Model):
   
            
     def save(self, *args, **kwargs):
+        
         if not self.user: 
             self.user = User.objects.create_user(
-                username = self.email.split("@")[0],
+                username = self.email,
                 email = self.email,
                 password = "planB",
                 first_name = '',
@@ -95,7 +96,6 @@ class Worker(models.Model):
                 is_active = True,
                 is_staff = True,
             )
-            self.id = self.user.id
             self.user.save()
         super().save(*args, **kwargs)
 
